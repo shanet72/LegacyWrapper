@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 using LegacyWrapper.Common.Serialization;
 using LegacyWrapper.ErrorHandling;
 using PommaLabs.Thrower;
@@ -36,11 +32,11 @@ namespace LegacyWrapper.Interop
         private static Type CreateTypeBuilder(CallData callData)
         {
             AssemblyName asmName = new AssemblyName(AssemblyName);
-            AssemblyBuilder asmBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(asmName, AssemblyBuilderAccess.Run);
-            ModuleBuilder modBuilder = asmBuilder.DefineDynamicModule(ModuleName, emitSymbolInfo: false);
+            AssemblyBuilder asmBuilder = AssemblyBuilder.DefineDynamicAssembly(asmName, AssemblyBuilderAccess.Run);
+            ModuleBuilder modBuilder = asmBuilder.DefineDynamicModule(ModuleName);
             TypeBuilder typeBuilder = modBuilder.DefineType(TypeName, TypeAttributes.Class | TypeAttributes.Public);
 
-            MethodBuilder pinvokeBuilder = typeBuilder.DefinePInvokeMethod(
+            MethodBuilder pInvokeBuilder = modBuilder.DefinePInvokeMethod(
                 name: callData.ProcedureName,
                 dllName: callData.LibraryName,
                 attributes: MethodAttributes.Static | MethodAttributes.Public | MethodAttributes.PinvokeImpl,
@@ -50,7 +46,7 @@ namespace LegacyWrapper.Interop
                 nativeCallConv: callData.CallingConvention,
                 nativeCharSet: callData.CharSet);
 
-            pinvokeBuilder.SetImplementationFlags(pinvokeBuilder.GetMethodImplementationFlags() | MethodImplAttributes.PreserveSig);
+            pInvokeBuilder.SetImplementationFlags(pInvokeBuilder.GetMethodImplementationFlags() | MethodImplAttributes.PreserveSig);
 
             return typeBuilder.CreateType();
         }

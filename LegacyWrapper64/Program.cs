@@ -1,4 +1,4 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Runtime.ExceptionServices;
 using LegacyWrapper.Handler;
 using PommaLabs.Thrower;

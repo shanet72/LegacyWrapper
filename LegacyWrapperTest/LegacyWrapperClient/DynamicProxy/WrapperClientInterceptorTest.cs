@@ -1,10 +1,5 @@
 ﻿using System;
-using System.CodeDom;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Reflection;
-using Castle.DynamicProxy;
 using LegacyWrapper.Common.Attributes;
 using LegacyWrapper.Common.Serialization;
 using LegacyWrapper.ErrorHandling;
@@ -14,7 +9,7 @@ using LegacyWrapperClient.DynamicProxy;
 using LegacyWrapperClient.Transport;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Moq.Protected;
+using IInvocation = Castle.DynamicProxy.IInvocation;
 
 namespace LegacyWrapperTest.LegacyWrapperClient.DynamicProxy
 {

@@ -15,10 +15,10 @@ namespace LegacyWrapperTest.LegacyWrapperClient.Client
         {
             Mock<IPipeConnector> pipeConnectorMock = new Mock<IPipeConnector>();
             pipeConnectorMock.Setup(m => m.ReceiveCallResponse())
-                .Returns(new CallResult() { Parameters = new object[0] });
+                .Returns(new CallResult() { Parameters = Array.Empty<object>() });
             WrapperClient wrapperClient = new WrapperClient(pipeConnectorMock.Object);
 
-            wrapperClient.InvokeInternal(new CallData() { Parameters = new object[0] });
+            wrapperClient.InvokeInternal(new CallData() { Parameters = Array.Empty<object>() });
 
             pipeConnectorMock.Verify(m => m.SendCallRequest(It.IsAny<CallData>()), Times.Once);
             pipeConnectorMock.Verify(m => m.ReceiveCallResponse(), Times.Once);
