@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LegacyWrapperClient</RootNamespace>
     <AssemblyName>Codefoundry.LegacyWrapperClient</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -57,7 +57,9 @@
   <ItemGroup>
     <Compile Include="Architecture\TargetArchitecture.cs" />
     <Compile Include="ProcessHandling\IProcessFactory.cs" />
-    <Compile Include="ProcessHandling\MockableProcess.cs"/>
+    <Compile Include="ProcessHandling\MockableProcess.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ProcessHandling\ProcessFactory.cs" />
     <Compile Include="Transport\IPipeConnector.cs" />
     <Compile Include="ProcessHandling\IWrapperProcessStarter.cs" />
